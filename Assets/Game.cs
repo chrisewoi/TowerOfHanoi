@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+using System.Collections;
 
 public class Game : MonoBehaviour
 {
@@ -13,9 +13,13 @@ public class Game : MonoBehaviour
     // Colour palette
     public Color regularColor, highlightedColor;
 
+    // Text PROPERTY; counting the number of movement. Property to push update to UI field
     public TMP_Text turnTextDisplay;
 
     private int turnCounter;
+
+    // How long between rise and fall animations
+    public float animationTime = 0.5f;
 
     public int turnProperty
     {
@@ -56,7 +60,7 @@ public class Game : MonoBehaviour
             selectedTower = null;
         } else
         {
-            MoveTiles(selectedTower, newTower);
+            StartCoroutine(MoveTiles(selectedTower, newTower));
             selectedTower = null;
         }
 
@@ -70,21 +74,30 @@ public class Game : MonoBehaviour
      * If the target tower is empty, move
      * or if the top tile is < target tile, move
      * move = reassign parents as the tagetTower's parent
+     * 
+     * UPDATED
+     * updated to IEnumerator, allowing for the function to take place over multiple frames
+     * WaitForSeconds() will delay the movement, allowing us to trigger TileAnimations.
+     * Remember to use IEnumerators with StartCoroutine() as you call them.
+     * Also, we had turnProperty increase with each successful movement
      */
-    public void MoveTiles(Tower fromTower, Tower toTower)
+    public IEnumerator MoveTiles(Tower fromTower, Tower toTower)
     {
-        print("Moving from " + fromTower.name + " to " + toTower.name);
+        //print("Moving from " + fromTower.name + " to " + toTower.name);
         Transform topTile = fromTower.GetTopTile();
-        if (topTile == null) return;
+        if (topTile == null) yield return null;
 
         Transform targetTile = toTower.GetTopTile();
         if (targetTile == null ||
             topTile.GetComponent<RectTransform>().rect.width
             < targetTile.GetComponent<RectTransform>().rect.width)
         {
+            topTile.GetComponentInChildren<TileAnimations>().StartRise();
+            yield return new WaitForSeconds(animationTime);
             topTile.SetParent(toTower.towerAnchor);
             topTile.SetSiblingIndex(0);
             turnProperty++;
+            topTile.GetComponentInChildren<TileAnimations>().StartFall();
         }
     }
 
