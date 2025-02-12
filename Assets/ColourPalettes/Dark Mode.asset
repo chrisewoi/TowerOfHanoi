@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b16c85cba2cbc74e9e650bd0f162d25, type: 3}
+  m_Name: Dark Mode
+  m_EditorClassIdentifier: 
+  backgroundColor: {r: 0.32441956, g: 0.27941436, b: 0.3679245, a: 1}
+  towerColor: {r: 0.2047437, g: 0.2273186, b: 0.4056604, a: 1}
+  towerHighlight: {r: 0.19522074, g: 0.32221776, b: 0.38679248, a: 1}
+  tile1Color: {r: 0.5471698, g: 0.43233395, b: 0.24519402, a: 1}
+  tile2Color: {r: 0.5, g: 0.35732225, b: 0.077830195, a: 1}
+  tile3Color: {r: 0.4811321, g: 0.2771321, b: 0, a: 1}
+  tile4Color: {r: 0.38679248, g: 0.19736935, b: 0.056559276, a: 1}
+  tile5Color: {r: 0.24528301, g: 0.10372664, b: 0, a: 1}
+  textColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}

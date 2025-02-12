@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+
 
 public class Game : MonoBehaviour
 {
@@ -10,6 +12,23 @@ public class Game : MonoBehaviour
 
     // Colour palette
     public Color regularColor, highlightedColor;
+
+    public TMP_Text turnTextDisplay;
+
+    private int turnCounter;
+
+    public int turnProperty
+    {
+        get
+        {
+            return turnCounter;
+        }
+        set
+        {
+            turnCounter = value;
+            turnTextDisplay.text = turnCounter.ToString();
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,6 +84,7 @@ public class Game : MonoBehaviour
         {
             topTile.SetParent(toTower.towerAnchor);
             topTile.SetSiblingIndex(0);
+            turnProperty++;
         }
     }
 
