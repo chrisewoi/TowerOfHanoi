@@ -4,6 +4,9 @@ using System.Collections;
 
 public class Game : MonoBehaviour
 {
+    public GameManager gameManager;
+
+    private CanvasGroup canvasGroup;
     // Which tower has the player just selected
     public Tower selectedTower;
 
@@ -38,6 +41,13 @@ public class Game : MonoBehaviour
     void Start()
     {
         ApplyPalette();
+        canvasGroup = GetComponentInParent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+    }
+
+    void Update()
+    {
+        canvasGroup.alpha += animationTime * Time.deltaTime;
     }
     
     /* 
@@ -65,6 +75,7 @@ public class Game : MonoBehaviour
         }
 
         ApplyPalette();
+        gameManager.CheckGameOver();
     }
 
     /*
@@ -99,6 +110,8 @@ public class Game : MonoBehaviour
             turnProperty++;
             topTile.GetComponentInChildren<TileAnimations>().StartFall();
         }
+        
+        gameManager.CheckGameOver();
     }
 
     /*
